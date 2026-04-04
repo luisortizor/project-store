@@ -1,0 +1,37 @@
+.login-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    background-color: #fef9fb;
+    padding: 20px;
+    
+}
+
+.form__link-btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.form__link-btn:hover {
+    color: #ed7bb4;
+}
+
+/* El resto de estilos son los mismos que en Registro, 
+ya que importan las mismas clases (.form, .form__input, etc.) */
+.alerta-info {
+    background-color: #cce5ff;
+    color: #004085;
+    border: 1px solid #b8daff;
+}
+
+.form__label {
+    padding-bottom: 40px;
+}
