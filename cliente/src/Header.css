@@ -18,6 +18,20 @@
     align-items: center;
     gap: 30px;
 }
+.admin-link {
+    color: #e8a0c4 !important;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-btn:hover .icon-label {
+    color: #e8a0c4;
+}
 
 .logo {
     display: flex;

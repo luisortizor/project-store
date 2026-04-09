@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Home from './Home';       // <-- Importamos el Home
+import Home from './Home';
 import Registro from './Registro';
 import Login from './Login';
 import Tienda from './Tienda';
+import AdminProductos from './AdminProductos'; // <-- Importamos el nuevo módulo
 
 function App() {
-  // AHORA LA VISTA POR DEFECTO ES 'home'
   const [vistaActual, setVistaActual] = useState('home');
   const [usuario, setUsuario] = useState(null);
 
+  // Al cargar la app, verificamos si hay una sesión activa
   useEffect(() => {
     const usuarioGuardado = localStorage.getItem('usuario');
     if (usuarioGuardado) {
@@ -21,16 +22,16 @@ function App() {
   const cerrarSesion = () => {
     localStorage.removeItem('usuario');
     setUsuario(null);
-    setVistaActual('home'); // Al salir, te devuelve al inicio
+    setVistaActual('home'); 
   };
 
   const renderizarVista = () => {
-    // Si la vista es Home, mostramos Home
+    // 1. Vista de Inicio
     if (vistaActual === 'home') {
       return <Home cambiarVista={setVistaActual} />;
     }
 
-    // CORRECCIÓN AQUÍ: Agregamos cerrarSesion y cambiarVista
+    // 2. Vista de Tienda (Solo si está logueado o redirección si intenta ir a login estando ya dentro)
     if (vistaActual === 'tienda' || (usuario && vistaActual === 'login')) {
       return (
         <Tienda
@@ -41,6 +42,15 @@ function App() {
       );
     }
 
+    // 3. Módulo Administrativo (PROTEGIDO)
+    if (vistaActual === 'admin') {
+      // Si el rol es 'admin', mostramos el CRUD, de lo contrario al Home
+      return usuario?.rol === 'admin' ? 
+        <AdminProductos /> : 
+        <Home cambiarVista={setVistaActual} />;
+    }
+
+    // 4. Login y Registro
     if (vistaActual === 'login') {
       return <Login cambiarVista={setVistaActual} setUsuario={setUsuario} />;
     }
@@ -52,7 +62,6 @@ function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-
       <Header
         usuario={usuario}
         cerrarSesion={cerrarSesion}
@@ -64,7 +73,6 @@ function App() {
       </div>
 
       <Footer />
-
     </div>
   )
 }

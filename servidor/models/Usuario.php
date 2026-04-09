@@ -1,10 +1,8 @@
 <?php
 class Usuario {
-    // Conexión a la base de datos y nombre de la tabla
     private $conn;
     private $table_name = "usuarios";
 
-    // Propiedades del objeto
     public $id;
     public $nombres;
     public $apellidos;
@@ -12,16 +10,15 @@ class Usuario {
     public $celular;
     public $fecha_nacimiento;
     public $password;
-    public $rol;
+    public $rol; // Propiedad presente
     public $terminos_aceptados;
 
-    // Constructor
     public function __construct($db) {
         $this->conn = $db;
     }
 
     // ----------------------------------------------------
-    // MÉTODO 1: Verificar si el correo ya existe
+    // MÉTODO 1: Verificar si el correo ya existe (¡Fundamental para el Login!)
     // ----------------------------------------------------
     public function emailExiste() {
         $query = "SELECT id, nombres, apellidos, password, rol 
@@ -40,20 +37,21 @@ class Usuario {
             $this->nombres = $row['nombres'];
             $this->apellidos = $row['apellidos'];
             $this->password = $row['password']; 
-            $this->rol = $row['rol'];
+            $this->rol = $row['rol']; // Aquí cargamos el rol de la DB al objeto
             return true;
         }
         return false;
     }
 
     // ----------------------------------------------------
-    // MÉTODO 2: Registrar un nuevo usuario
+    // MÉTODO 2: Registrar un nuevo usuario (CORREGIDO)
     // ----------------------------------------------------
     public function registrar() {
+        // Agregamos rol=:rol a la consulta SQL
         $query = "INSERT INTO " . $this->table_name . " 
                   SET nombres=:nombres, apellidos=:apellidos, correo=:correo, 
                       celular=:celular, fecha_nacimiento=:fecha_nacimiento, 
-                      password=:password, terminos_aceptados=:terminos_aceptados";
+                      password=:password, rol=:rol, terminos_aceptados=:terminos_aceptados";
 
         $stmt = $this->conn->prepare($query);
 
@@ -64,15 +62,17 @@ class Usuario {
         $this->celular = htmlspecialchars(strip_tags($this->celular));
         $this->fecha_nacimiento = htmlspecialchars(strip_tags($this->fecha_nacimiento));
         $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->rol = htmlspecialchars(strip_tags($this->rol)); // Limpiamos el rol
         $this->terminos_aceptados = htmlspecialchars(strip_tags($this->terminos_aceptados));
 
-        // Vinculación
+        // Vinculación (Agregamos el bindParam del rol)
         $stmt->bindParam(":nombres", $this->nombres);
         $stmt->bindParam(":apellidos", $this->apellidos);
         $stmt->bindParam(":correo", $this->correo);
         $stmt->bindParam(":celular", $this->celular);
         $stmt->bindParam(":fecha_nacimiento", $this->fecha_nacimiento);
         $stmt->bindParam(":password", $this->password);
+        $stmt->bindParam(":rol", $this->rol); // <-- VÍNCULO VITAL
         $stmt->bindParam(":terminos_aceptados", $this->terminos_aceptados);
 
         if($stmt->execute()) return true;

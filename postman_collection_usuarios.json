@@ -1,0 +1,176 @@
+{
+  "info": {
+    "_postman_id": "200d1932-be7d-4d18-8c9e-955cc1f8a861",
+    "name": "Usuarios API Proyecto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53207350",
+    "_collection_link": "https://go.postman.co/collection/53207350-200d1932-be7d-4d18-8c9e-955cc1f8a861?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Crear",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombres\": \"Mario Alberto\",\r\n    \"apellidos\": \"Hernandez Rozo\",\r\n    \"correo\": \"marioherzandez@gmail.com\",\r\n    \"celular\": \"3209876563\",\r\n    \"fecha_nacimiento\": \"1998-10-15\",\r\n    \"password\": \"12345678\",\r\n    \"confirmar_password\": \"12345678\",\r\n    \"terminos_aceptados\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/usuarios.php?accion=registro",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "usuarios.php"
+          ],
+          "query": [
+            {
+              "key": "accion",
+              "value": "registro"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Consultar",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/usuarios.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "usuarios.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 14, \r\n    \"nombres\": \"Mario Alberto\",\r\n    \"apellidos\": \"Hernandez Rozo\",\r\n    \"celular\": \"3200000000\",\r\n    \"fecha_nacimiento\": \"1999-9-9\" \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/usuarios.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "usuarios.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 14\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/usuarios.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "usuarios.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"correo\": \"marioherzandez@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/usuarios.php?accion=login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "usuarios.php"
+          ],
+          "query": [
+            {
+              "key": "accion",
+              "value": "login"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// Importamos los íconos
-import { FaSearch, FaBars, FaSignOutAlt, FaUser, FaHeart, FaShoppingCart, FaTimes, FaChevronDown } from 'react-icons/fa';
+// Importamos los íconos (agregué FaTools para la gestión)
+import { FaSearch, FaBars, FaSignOutAlt, FaUser, FaShoppingCart, FaTimes, FaChevronDown, FaTools } from 'react-icons/fa';
 import './Header.css';
 
 const Header = ({ usuario, cerrarSesion, cambiarVista }) => {
@@ -53,6 +53,14 @@ const Header = ({ usuario, cerrarSesion, cambiarVista }) => {
                     </button>
 
                     <div className="header-icons">
+                        {/* --- BOTÓN DE ADMINISTRACIÓN (SOLO PARA ROL ADMIN) --- */}
+                        {usuario?.rol === 'admin' && (
+                            <button className="icon-btn admin-header-btn" onClick={() => cambiarVista('admin')} title="Panel de Gestión">
+                                <FaTools style={{color: '#e8a0c4', fontSize: '1.2rem'}} />
+                                <span className="icon-label" style={{fontWeight: 'bold', color: '#e8a0c4'}}>Gestionar</span>
+                            </button>
+                        )}
+
                         {usuario ? (
                             <button className="icon-btn" onClick={cerrarSesion}>
                                 <FaSignOutAlt style={{color: '#ff4d4d', fontSize: '1.2rem'}} />
@@ -64,6 +72,7 @@ const Header = ({ usuario, cerrarSesion, cambiarVista }) => {
                                 <span className="icon-label">Mi Cuenta</span>
                             </button>
                         )}
+                        
                         <button className="icon-btn" onClick={() => cambiarVista('tienda')}>
                             <FaShoppingCart style={{fontSize: '1.2rem'}} />
                             <span className="icon-label">Mi Carrito</span>
@@ -80,6 +89,15 @@ const Header = ({ usuario, cerrarSesion, cambiarVista }) => {
                 <div className="nav-content">
                     <ul className="nav-menu">
                         
+                        {/* ACCESO RÁPIDO ADMIN EN MÓVIL */}
+                        {usuario?.rol === 'admin' && (
+                            <li className="nav-item">
+                                <a href="#" className="nav-link admin-mobile-link" onClick={(e) => { e.preventDefault(); cambiarVista('admin'); cerrarMenu(); }}>
+                                    <FaTools /> GESTIONAR INVENTARIO
+                                </a>
+                            </li>
+                        )}
+
                         {/* 1. PAPELERÍA */}
                         <li className={`nav-item ${submenuActivo === 'papeleria' ? 'submenu-abierto' : ''}`}>
                             <a href="#" className="nav-link" onClick={(e) => manejarSubmenu(e, 'papeleria')}>
@@ -161,7 +179,6 @@ const Header = ({ usuario, cerrarSesion, cambiarVista }) => {
                                 <li><a href="#" className="submenu-link" onClick={irATienda}>Cables USB</a></li>
                             </ul>
                         </li>
-
                     </ul>
                 </div>
             </nav>

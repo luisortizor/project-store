@@ -8,10 +8,11 @@ class UsuarioController {
         $this->usuario = $usuario;
     }
 
-    // ----------------------------------------------------
-    // LÓGICA PARA REGISTRAR
+// ----------------------------------------------------
+    // LÓGICA PARA REGISTRAR (CORREGIDA)
     // ----------------------------------------------------
     public function registrar($data) {
+        // Validamos que existan todos los campos, incluyendo confirmar_password
         if (
             empty($data->nombres) || empty($data->apellidos) || 
             empty($data->correo) || empty($data->celular) || 
@@ -39,6 +40,10 @@ class UsuarioController {
         $this->usuario->celular = $data->celular;
         $this->usuario->fecha_nacimiento = $data->fecha_nacimiento;
         $this->usuario->terminos_aceptados = $data->terminos_aceptados;
+        
+        // --- AQUÍ CAPTURAMOS EL ROL PARA POSTMAN ---
+        // Si en el JSON viene 'admin', lo asignamos. Si no, será 'cliente'.
+        $this->usuario->rol = !empty($data->rol) ? $data->rol : 'cliente';
         
         // ENCRIPTAR CONTRASEÑA
         $this->usuario->password = password_hash($data->password, PASSWORD_BCRYPT);

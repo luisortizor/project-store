@@ -1,21 +1,24 @@
 <?php
-// 1. Configurar Cabeceras (CORS y formato JSON)
+// 1. Configurar Cabeceras (CORS y formato JSON) - ¡CORREGIDAS!
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+
+// EL ERROR ESTABA AQUÍ: Ahora permitimos todos los métodos del CRUD
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 // Si es una petición OPTIONS (Pre-flight de React), respondemos 200 OK y terminamos.
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
 // 2. Incluir los archivos necesarios
-include_once '../config/database.php';
-include_once '../models/Usuario.php';
-include_once '../controllers/UsuarioController.php';
+include_once dirname(__FILE__) . '/../config/database.php';
+include_once dirname(__FILE__) . '/../models/Usuario.php';
+include_once dirname(__FILE__) . '/../controllers/UsuarioController.php';
 
 // 3. Inicializar Conexión y Objetos
 $database = new Database();

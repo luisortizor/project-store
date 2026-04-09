@@ -1,0 +1,122 @@
+{
+  "info": {
+    "_postman_id": "543b224d-3d5e-4b9b-9e71-8f424bea3a82",
+    "name": "Productos API Proyecto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53207350",
+    "_collection_link": "https://go.postman.co/collection/53207350-543b224d-3d5e-4b9b-9e71-8f424bea3a82?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Crear",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Cuaderno Argollado Jean Book\",\r\n    \"descripcion\": \"Cuaderno de 100 hojas cuadriculadas, tapa dura.\",\r\n    \"precio\": 12500,\r\n    \"stock\": 50,\r\n    \"categoria\": \"Cuadernos\",\r\n    \"imagen_url\": \"https://link-de-tu-imagen.com/cuaderno.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/productos.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "productos.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Leer",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/productos.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "productos.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1, \r\n    \"nombre\": \"Cuaderno Argollado Jean Book - Premium\",\r\n    \"descripcion\": \"Cuaderno de 100 hojas, ahora con stickers.\",\r\n    \"precio\": 13800,\r\n    \"stock\": 45,\r\n    \"categoria\": \"Cuadernos\",\r\n    \"imagen_url\": \"https://link-de-tu-imagen.com/cuaderno.jpg\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/productos.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "productos.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/project-store/servidor/api/productos.php?id=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "project-store",
+            "servidor",
+            "api",
+            "productos.php"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
